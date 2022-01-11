@@ -1,0 +1,57 @@
+\clearpage
+\section{Physics object definitions}\label{sec:objects}
+%reconstruction algorithms, isloation, cleaning, IDs, particle flow
+
+In this section, we provide the definitions of physics objects used in the analysis.
+We make use of Regions of Interest, muons, taus, and jets.
+
+\subsection{Muons}\label{sec:muons}
+
+
+The analysis sources SlimmedMuons from MINIAOD to produce {\tt selectedPatMuons}.
+Muons require 
+Muon objects require 
+\begin{itemize}
+  \item $\pt$ $>$ 12 GeV to reach BPH trigger plateau
+  \item $|\eta|$ $<$ 1.5 due to L1 seed $|\eta|$ cut in BPH HLT path
+  \item Pass the Loose ID criterion (isLooseMuon). As described in the Muon POG~\cite{muonpog}.
+\end{itemize}
+
+
+The Isolation requirements on muons are discussed in Section~\ref{sec:selections}.
+
+
+\subsection{Jets}\label{sec:jets}
+
+The analysis sources SlimmedJets from MINIAOD to produce {\tt selectedJets}.
+CMS reconstruct jets from calorimeter energy deposits using the
+anti-$k_T$ clustering algorithm with a distance parameter of $R=0.4$~\cite{Cacciari:2008gp}.
+Then, the calojets are inputed into the Particle-Flow (PF) algorithms to produce PFJets. Variables in PFJets class are then slimmed to be saved into MINIAOD files. The analysis uses these SlimmedJets for the jets' b-tagging scores and others.
+Jet objects require
+\begin{itemize}
+  \item \pt $>$ 20 GeV
+  \item $|\eta|$ $<$ 2.4
+  \item 0 $\leq$ emEnergyFraction $\leq$ 0.9
+  \item 0 $\leq$ energyFractionHadronic $\leq$ 0.9
+  \item No selected electron or muon within $\Delta R=0.4$
+\end{itemize}
+The energy fraction cuts above are inspired by the recommended Run2 Tight jet-ID
+cuts for particle flow jets~\cite{jetid_2016,jetid_2017,jetid_2018}.
+
+\subsection{Taus}\label{sec:taus}
+
+The analysis sources PAT::slimmedTaus from MINIAOD for MC and RECO::slimmedTaus for Data to produce {\tt selectedTaus}.
+$\tau$ objects decay hadronically for 64\% of its decay. Hadron-Plus-Strip (HPS) algorithm enables the reconstruction of $\tau$'s hadronic decay. 
+HPS uses PFJets as its starting point. 
+$\tau$'s hadronic decay can be reconstructed with PFJets' charged Hadrons in HCAL and 2 $\gamma$s from $\pi^{0}$ in ECAL.  
+Tau objects require
+\begin{itemize}
+  \item \pt $>$ 20 GeV
+  \item $|\eta|$ $<$ 2.4
+\end{itemize}
+
+\subsection{Region of Interest}\label{sec:ROIs}
+
+The complete construction procedures of Regions of Interest are detailed in the following subsections.
+
+
