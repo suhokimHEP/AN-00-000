@@ -54,4 +54,48 @@ Tau objects require
 
 The complete construction procedures of Regions of Interest are detailed in the following subsections.
 
+\begin{itemize}
+  \item Good quality track selection
+  \item Vertex Fitted from pair-wise tracks by V0Fitter in CMSSW
+  \item Cluster the fitted vertices to form a Region of Intrest (ROI)
+  \item Look for tracks around $\Delta R=0.3$ to save ROI isolation information
+\end{itemize}
+
+\subsubsection{Tracks}\label{sec:ROI_tracks}
+
+The analysis sources packedPFCandidates and lostTracks from MINIAOD.
+Track parameters and convariance values will be propagated along the ROI production process and no value should either be infinite or N/A
+\begin{itemize}
+  \item !isinf(tracks.parameter)  $&&$ !isnan(tracks.parameter) 
+  \item !isinf(tracks.covariance) $&&$ !isnan(tracks.covariance) 
+  \item Number of valid hits $>$ 3
+  \item \pt $>$ 0.35
+  \item Track $IPSig_{XY}>$2.
+  \item Track $IPSig_{Z}>$-1.
+  \item Track normalized $\chi^{2}<$10.
+\end{itemize}
+
+
+\subsubsection{Vertex Fitter}\label{sec:ROI_V0Fitter}
+
+The analysis sources offlineBeamspot from MINIAOD for beamspot reference.
+Vertex fitter is KalmanVertexFitter with cuts on the vertex
+\begin{itemize}
+  \item Vertex $\chi^{2}<$6.63 
+  \item Transverse Decay distance significance$>$15.
+  \item V0mass $<$13000GeV
+  \item cos($\theta_{XY}$) betwwen x and p of V0 candidate $>$ 0
+  \item cos($\theta_{XYZ}$) betwwen x and p of V0 candidate $>$ -2
+\end{itemize}
+
+
+\subsubsection{ROI formation}\label{sec:ROI_ROIformation}
+
+Fitted V0s are clustered to form a Region of Interest (ROI).
+These ROIs have cuts on their parameters as below.
+\begin{itemize}
+  \item Radius of ROI $<$ 1 cm
+  \item Annulus $\Delta R <$ 0.3 
+\end{itemize}
+
 
